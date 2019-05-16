@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import './App.css';
+import CardGame from './CardGame'
 
 class App extends Component {
     render() {
         return (
-            <h1>hello!</h1>
+            <div>
+                <CardGame>
+                    
+                </CardGame>
+            </div>
         );
     };
 };

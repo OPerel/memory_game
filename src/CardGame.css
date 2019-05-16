@@ -1,0 +1,29 @@
+.memory-game {
+    width: 80vw;
+    height: 80vw;
+    display: flex;
+    margin: 50px auto;
+    border: solid black;
+}
+
+@media only screen and (min-width: 450px) {
+    .memory-game {
+        width: 70vw;
+        height: 70vw;
+    }
+}
+
+@media only screen and (min-width: 1030px) {
+    .memory-game {
+        width: 820px;
+        height: 820px;
+    }
+}
+
+@media only screen and (max-height: 400px) {
+    .memory-game {
+        width: 45vw;
+        height: 45vw;
+        margin: 10px auto;
+    }
+}

@@ -6,11 +6,5 @@
 
 body {
     height: 100vh;
-    display: flex;
     background-color: #dfdfdf;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-    monospace;
 }
