@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import CardGame from './CardGame'
 import Card from './Card';
+import shuffle from './shuffle';
 
 class App extends Component {
     constructor () {
@@ -23,8 +24,16 @@ class App extends Component {
             let pair = [card, card];
             return pair;
         })
-        const newCards = cardList.flat();
+        const newCards = shuffle(cardList.flat());
         return newCards;
+    }
+
+    flipCards(e) {
+        e.currentTarget.classList.toggle('flip')
+    }
+
+    handleClick = (card) => (e) => {
+        this.flipCards(e);
     }
 
     render() {
@@ -36,6 +45,7 @@ class App extends Component {
                             <Card
                             key={i}
                             url={card}
+                            onClicking={this.handleClick(card)}
                             />
                         )
                     })
