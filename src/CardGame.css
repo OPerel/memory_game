@@ -5,7 +5,6 @@
     flex-wrap: wrap;
     margin: 50px auto;
     border: solid black;
-    perspective: 1000px;
 }
 
 @media only screen and (min-width: 450px) {

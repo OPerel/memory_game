@@ -11,9 +11,15 @@ const images = importAll(require.context('./img', false, /\.(svg)$/));
 
 const Card = ({ url, onClicking }) => {
     return (
-        <div className='card' onClick={onClicking}>
-            <img className='front-face' src={images[url]} alt='f' />
-            <img className='back-face' src={images['js-badge.svg']} alt='b' />
+        <div className='card'>
+            <div className='inner-card' onClick={onClicking}>
+                <div className='front-face'>
+                    <img src={images[url]} alt='f' />
+                </div>
+                <div className='back-face'>
+                    <img src={images['js-badge.svg']} alt='b' />
+                </div>
+            </div>
         </div>
     );
 };
