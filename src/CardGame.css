@@ -2,6 +2,7 @@
     width: 80vw;
     height: 80vw;
     display: flex;
+    flex-wrap: wrap;
     margin: 50px auto;
     border: solid black;
 }
@@ -13,10 +14,10 @@
     }
 }
 
-@media only screen and (min-width: 1030px) {
+@media only screen and (min-width: 840px) {
     .memory-game {
-        width: 820px;
-        height: 820px;
+        width: 620px;
+        height: 620px;
     }
 }
 
