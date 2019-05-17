@@ -1,7 +1,7 @@
 .card {
     width: calc(25% - 10px);
     height: calc(33.333% - 10px);
-    margin: 5px;
+    margin: 0.8%;
     position: relative;
     transform: scale(1);
     -webkit-transform-style: preserve-3d;
@@ -53,4 +53,9 @@
 .inner-card img {
     width: 70%;
     height: 70%;
+}
+
+.card .back-face:hover {
+    opacity: 0.9;
+    cursor: pointer;
 }
