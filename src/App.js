@@ -30,25 +30,36 @@ class App extends Component {
     };
 
     flipCards(e) {
-        e.currentTarget.classList.toggle('flip')
+        if (!e.currentTarget.classList.contains('match')) {
+            e.currentTarget.classList.toggle('flip')
+        }
     };
 
     clickedCards(e, card) {
-        // const currentCard = e.currentTarget;
-        this.setState(state => state.clicked.push(card));
+        const currentCard = e.currentTarget;
+        if (currentCard.classList.contains('flip') &&
+            !e.currentTarget.classList.contains('match')) {
+            this.setState(state => state.clicked.push({ name: card, node: currentCard} ));
+        }
     };
 
     compareCards() {
-        const {clicked} = this.state;
-        console.log(this.state.clicked);
-        if (clicked.length === 2) {
-            console.log(clicked[0], clicked[1]);
-            if (clicked[0] === clicked[1]) {
-                console.log(true);
-            } else {
-                console.log(false);
+        this.setState((prev, state) => {
+            const {clicked} = prev;
+            if (clicked.length === 2) {
+                if (clicked[0].name === clicked[1].name) {
+                    console.log('equal!');
+                    clicked[0].node.classList.add('match');
+                    clicked[1].node.classList.add('match');
+                } else {
+                    console.log('not equal');
+                    setTimeout(() => {
+                        clicked[0].node.classList.remove('flip');
+                        clicked[1].node.classList.remove('flip');
+                    }, 1500)
+                };
             };
-        };
+        });
     };
 
     handleClick = (card) => (e) => {
@@ -58,10 +69,12 @@ class App extends Component {
     };
 
     shouldComponentUpdate() {
-        if (this.state.clicked.length <= 2) {
+        if (this.state.clicked.length < 2) {
             return false;
         } else {
-            this.setState({ clicked: [] })
+            this.setState((prev, state) => {
+                prev.clicked = [];
+            })
             return false;
         }
     }
