@@ -38,7 +38,7 @@ class App extends Component {
     clickedCards(e, card) {
         const currentCard = e.currentTarget;
         if (currentCard.classList.contains('flip') &&
-            !e.currentTarget.classList.contains('match')) {
+            !currentCard.classList.contains('match')) {
             this.setState(state => state.clicked.push({ name: card, node: currentCard} ));
         }
     };
@@ -48,11 +48,9 @@ class App extends Component {
             const {clicked} = prev;
             if (clicked.length === 2) {
                 if (clicked[0].name === clicked[1].name) {
-                    console.log('equal!');
                     clicked[0].node.classList.add('match');
                     clicked[1].node.classList.add('match');
                 } else {
-                    console.log('not equal');
                     setTimeout(() => {
                         clicked[0].node.classList.remove('flip');
                         clicked[1].node.classList.remove('flip');
@@ -76,8 +74,8 @@ class App extends Component {
                 prev.clicked = [];
             })
             return false;
-        }
-    }
+        };
+    };
 
     render() {
         return (
