@@ -4,7 +4,6 @@
     display: flex;
     flex-wrap: wrap;
     margin: 50px auto;
-    border: solid black;
 }
 
 @media only screen and (min-width: 450px) {

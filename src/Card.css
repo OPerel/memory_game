@@ -30,10 +30,10 @@
 .inner-card div {
     display: flex;
     justify-content: center;
+    align-items: center;
     position: absolute;
     height: 100%;
     width: 100%;
-    padding: 35px;
     border-radius: 5px;
     background: #3b785a;
     -webkit-backface-visibility: hidden;
@@ -48,4 +48,9 @@
 .inner-card.flip {
     -webkit-transform: rotateY(180deg);
             transform: rotateY(180deg);
+}
+
+.inner-card img {
+    width: 70%;
+    height: 70%;
 }
