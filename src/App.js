@@ -7,7 +7,7 @@ class App extends Component {
     constructor () {
         super();
         this.state = {
-            cards: [
+            images: [
                 'angular.svg',
                 'aurelia.svg',
                 'backbone.svg',
@@ -20,13 +20,8 @@ class App extends Component {
     };
 
     makeCards() {
-        const {cards} = this.state;
-        const cardList = cards.map((card, i) => {
-            let pair = [card, card];
-            return pair;
-        });
-        const newCards = shuffle(cardList.flat());
-        return newCards;
+        const {images} = this.state;
+        return shuffle(images.map(image => [image, image]).flat());
     };
 
     flipCards(e) {

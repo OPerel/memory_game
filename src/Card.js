@@ -1,7 +1,7 @@
 import React from 'react';
 import './Card.css';
 
-const importAll = (r) => {
+const importImages = (r) => {
     let images = {};
     r.keys().forEach((item, index) => {
         images[item.replace('./', '')] = r(item);
@@ -9,7 +9,7 @@ const importAll = (r) => {
     return images;
 }
 
-const images = importAll(require.context('./img', false, /\.(svg)$/));
+const images = importImages(require.context('./img', false, /\.(svg)$/));
 
 const Card = ({ url, onClicking }) => {
     return (
