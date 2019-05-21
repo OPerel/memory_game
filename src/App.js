@@ -20,7 +20,7 @@ class App extends Component {
         .then(data => this.setState(state => {
             return state.deck = data;
         },() => this.drawCards()));
-    }
+    };
 
     drawCards() {
         for (var i = 0; i < this.state.deck.remaining; i++) {
@@ -35,7 +35,7 @@ class App extends Component {
     flipCards(e) {
         if (!e.currentTarget.classList.contains('match')) {
             e.currentTarget.classList.add('flip')
-        }
+        };
     };
 
     clickedCards(e, card) {
@@ -44,7 +44,7 @@ class App extends Component {
             this.setState(state => state.clicked.push({ card: card, node: currentCard }));
         } else if (this.state.clicked[0].card.code !== card.code) {
             this.setState(state => state.clicked.push({ card: card, node: currentCard }));
-        }
+        };
     };
 
     compareCards() {
@@ -61,7 +61,7 @@ class App extends Component {
                     }, 1500)
                 };
                 prev.clicked = [];
-            }
+            };
         });
     };
 
@@ -76,13 +76,13 @@ class App extends Component {
             deck: {},
             cards: [],
             clicked: []
-        })
+        });
         this.fetchDeck();
-    }
+    };
 
     componentDidMount() {
         this.fetchDeck();
-    }
+    };
 
     render() {
         return (
@@ -103,7 +103,7 @@ class App extends Component {
                 </CardGame>
             </div>
         );
-    }
+    };
 };
 
 export default App;

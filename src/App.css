@@ -3,7 +3,7 @@
     flex-direction: column-reverse;
 }
 
-@media only screen and (min-width: 640px) {
+@media only screen and (min-width: 992px) {
     .cont {
         flex-direction: row;
     }
