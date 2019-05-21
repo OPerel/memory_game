@@ -3,13 +3,19 @@
     height: 80vw;
     display: flex;
     flex-wrap: wrap;
-    margin: 50px auto;
+    margin: 10% auto;
 }
 
 @media only screen and (min-width: 450px) {
     .memory-game {
         width: 70vw;
         height: 70vw;
+    }
+}
+
+@media only screen and (min-width: 770px) {
+    .memory-game {
+        margin: 2% auto;
     }
 }
 

@@ -29,6 +29,10 @@
     font-size: 1.3em;
 }
 
+.header h2 {
+    margin: 5px 0;
+}
+
 .footer {
     margin-bottom: 15%;
 }

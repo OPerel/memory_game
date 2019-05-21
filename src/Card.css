@@ -54,7 +54,12 @@
     height: 100%;
 }
 
-.card .back-face:hover {
+.card .back-face {
     opacity: 0.9;
+}
+
+.card .back-face:hover {
+    opacity: 1;
+    box-shadow: 1px 1px 7px 1px #a4f295;
     cursor: pointer;
 }
