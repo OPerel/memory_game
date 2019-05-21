@@ -1,27 +1,34 @@
 import React, { Component } from 'react';
 import CardGame from './CardGame'
 import Card from './Card';
-import shuffle from './shuffle';
+// import shuffle from './shuffle';
 
 class App extends Component {
     constructor () {
         super();
         this.state = {
-            images: [
-                'angular.svg',
-                'aurelia.svg',
-                'backbone.svg',
-                'ember.svg',
-                'react.svg',
-                'vue.svg'
-            ],
+            deck: {},
+            cards: [],
             clicked: []
         };
     };
 
-    makeCards() {
-        const {images} = this.state;
-        return shuffle(images.map(image => [image, image]).flat());
+    fetchDeck() {
+        return fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
+        .then(resp => resp.json())
+        .then(data => this.setState(state => {
+            return state.deck = data;
+        },() => { this.drawCards() }));
+    }
+
+    drawCards() {
+        for (var i = 0; i < this.state.deck.remaining; i++) {
+            fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
+            .then(resp => resp.json())
+            .then(card => this.setState(state => {
+                return state.cards.push(card.cards[0]);
+            }));
+        };
     };
 
     flipCards(e) {
@@ -61,26 +68,30 @@ class App extends Component {
         this.compareCards();
     };
 
-    shouldComponentUpdate() {
-        if (this.state.clicked.length < 2) {
-            return false;
-        } else {
-            this.setState((prev, state) => {
-                prev.clicked = [];
-            })
-            return false;
-        };
-    };
+    // shouldComponentUpdate() {
+    //     if (this.state.clicked.length < 2) {
+    //         return false;
+    //     } else {
+    //         this.setState((prev, state) => {
+    //             prev.clicked = [];
+    //         })
+    //         return false;
+    //     };
+    // };
+
+    componentDidMount() {
+        this.fetchDeck();
+    }
 
     render() {
         return (
             <CardGame>
                 {
-                    this.makeCards().map((card, i) => {
+                    this.state.cards.map((card, i) => {
                         return (
                             <Card
                             key={i}
-                            url={card}
+                            url={card.image}
                             onClicking={this.handleClick(card)}
                             />
                         )
@@ -88,7 +99,7 @@ class App extends Component {
                 }
             </CardGame>
         );
-    };
+    }
 };
 
 export default App;
