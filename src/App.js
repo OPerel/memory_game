@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import './App.css';
 import CardGame from './CardGame'
 import Card from './Card';
+import Sidebar from './Sidebar';
 
 class App extends Component {
     constructor () {
@@ -69,25 +71,37 @@ class App extends Component {
         this.compareCards();
     };
 
+    resetBoard() {
+        this.setState({
+            deck: {},
+            cards: [],
+            clicked: []
+        })
+        this.fetchDeck();
+    }
+
     componentDidMount() {
         this.fetchDeck();
     }
 
     render() {
         return (
-            <CardGame>
-                {
-                    this.state.cards.map((card, i) => {
-                        return (
-                            <Card
-                            key={i}
-                            url={card.image}
-                            onClicking={this.handleClick(card)}
-                            />
-                        )
-                    })
-                }
-            </CardGame>
+            <div className="cont">
+                <Sidebar reset={() => this.resetBoard()} />
+                <CardGame>
+                    {
+                        this.state.cards.map((card, i) => {
+                            return (
+                                <Card
+                                key={i}
+                                url={card.image}
+                                onClicking={this.handleClick(card)}
+                                />
+                            )
+                        })
+                    }
+                </CardGame>
+            </div>
         );
     }
 };

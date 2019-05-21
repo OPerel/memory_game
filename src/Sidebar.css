@@ -1,0 +1,11 @@
+.sidebar {
+    max-height: min-content;
+    margin: auto;
+    text-align: center;
+}
+
+@media only screen and (min-width: 640px) {
+    .sidebar {
+        max-width: 20%;
+    }
+}
