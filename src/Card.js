@@ -1,25 +1,16 @@
 import React from 'react';
 import './Card.css';
-
-const importImages = (r) => {
-    let images = {};
-    r.keys().forEach((item, index) => {
-        images[item.replace('./', '')] = r(item);
-    });
-    return images;
-}
-
-const images = importImages(require.context('./img', false, /\.(svg)$/));
+import back from './img/back.svg'
 
 const Card = ({ url, onClicking }) => {
     return (
         <div className='card'>
             <div className='inner-card' onClick={onClicking}>
                 <div className='front-face'>
-                    <img src={images[url]} alt='f' />
+                    <img src={url} alt='f' />
                 </div>
                 <div className='back-face'>
-                    <img src={images['js-badge.svg']} alt='b' />
+                    <img src={back} alt='b' />
                 </div>
             </div>
         </div>
