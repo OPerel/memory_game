@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import CardGame from './CardGame'
 import Card from './Card';
-// import shuffle from './shuffle';
 
 class App extends Component {
     constructor () {
@@ -18,7 +17,7 @@ class App extends Component {
         .then(resp => resp.json())
         .then(data => this.setState(state => {
             return state.deck = data;
-        },() => { this.drawCards() }));
+        },() => this.drawCards()));
     }
 
     drawCards() {
@@ -45,7 +44,6 @@ class App extends Component {
     compareCards() {
         this.setState((prev, state) => {
             const {clicked} = prev;
-            console.log(clicked);
             if (clicked[0].card.code !== clicked[1].card.code) {
                 if (clicked[0].card.value === clicked[1].card.value) {
                     clicked[0].node.classList.add('match');
