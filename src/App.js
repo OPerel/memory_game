@@ -39,17 +39,15 @@ class App extends Component {
 
     clickedCards(e, card) {
         const currentCard = e.currentTarget;
-        if (currentCard.classList.contains('flip') &&
-            !currentCard.classList.contains('match')) {
-            this.setState(state => state.clicked.push({ name: card, node: currentCard} ));
-        }
+        this.setState(state => state.clicked.push({ card: card, node: currentCard }));
     };
 
     compareCards() {
         this.setState((prev, state) => {
             const {clicked} = prev;
-            if (clicked.length === 2) {
-                if (clicked[0].name === clicked[1].name) {
+            console.log(clicked);
+            if (clicked[0].card.code !== clicked[1].card.code) {
+                if (clicked[0].card.value === clicked[1].card.value) {
                     clicked[0].node.classList.add('match');
                     clicked[1].node.classList.add('match');
                 } else {
@@ -58,26 +56,18 @@ class App extends Component {
                         clicked[1].node.classList.remove('flip');
                     }, 1500)
                 };
-            };
+            }
+            prev.clicked = [];
         });
     };
 
     handleClick = (card) => (e) => {
         this.flipCards(e);
         this.clickedCards(e, card);
-        this.compareCards();
+        if (this.state.clicked.length === 1) {
+            this.compareCards();
+        };
     };
-
-    // shouldComponentUpdate() {
-    //     if (this.state.clicked.length < 2) {
-    //         return false;
-    //     } else {
-    //         this.setState((prev, state) => {
-    //             prev.clicked = [];
-    //         })
-    //         return false;
-    //     };
-    // };
 
     componentDidMount() {
         this.fetchDeck();
