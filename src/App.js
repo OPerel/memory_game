@@ -38,13 +38,18 @@ class App extends Component {
 
     clickedCards(e, card) {
         const currentCard = e.currentTarget;
-        this.setState(state => state.clicked.push({ card: card, node: currentCard }));
+        if (this.state.clicked.length === 0) {
+            this.setState(state => state.clicked.push({ card: card, node: currentCard }));
+        } else if (this.state.clicked[0].card.code !== card.code) {
+            this.setState(state => state.clicked.push({ card: card, node: currentCard }));
+        }
+        console.log(this.state.clicked);
     };
 
     compareCards() {
         this.setState((prev, state) => {
             const {clicked} = prev;
-            if (clicked[0].card.code !== clicked[1].card.code) {
+            if (clicked.length === 2) {
                 if (clicked[0].card.value === clicked[1].card.value) {
                     clicked[0].node.classList.add('match');
                     clicked[1].node.classList.add('match');
@@ -54,17 +59,15 @@ class App extends Component {
                         clicked[1].node.classList.remove('flip');
                     }, 1500)
                 };
+                prev.clicked = [];
             }
-            prev.clicked = [];
         });
     };
 
     handleClick = (card) => (e) => {
         this.flipCards(e);
         this.clickedCards(e, card);
-        if (this.state.clicked.length === 1) {
-            this.compareCards();
-        };
+        this.compareCards();
     };
 
     componentDidMount() {
