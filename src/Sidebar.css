@@ -1,11 +1,52 @@
 .sidebar {
-    max-height: min-content;
-    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 auto;
     text-align: center;
+    font-size: 1.1em;
 }
 
-@media only screen and (min-width: 992px) {
+.header {
+    /* position: absolute;
+    top: 20px; */
+}
+
+.btn {
+    margin: 20px 0;
+    border: none;
+    font-size: 1em;
+    background-color: transparent;
+    color: #001f4f;
+}
+
+.btn:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.header {
+    font-size: 1.3em;
+}
+
+.footer {
+    margin-bottom: 15%;
+}
+
+.footer a {
+    color: inherit;
+}
+
+@media only screen and (min-width: 770px) {
     .sidebar {
         max-width: 20%;
+    }
+
+    .header {
+        margin-top: 30%;
+    }
+
+    .footer {
+        margin-bottom: 30%;
     }
 }
