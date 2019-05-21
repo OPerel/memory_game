@@ -32,7 +32,7 @@ class App extends Component {
 
     flipCards(e) {
         if (!e.currentTarget.classList.contains('match')) {
-            e.currentTarget.classList.toggle('flip')
+            e.currentTarget.classList.add('flip')
         }
     };
 
