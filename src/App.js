@@ -43,7 +43,6 @@ class App extends Component {
         } else if (this.state.clicked[0].card.code !== card.code) {
             this.setState(state => state.clicked.push({ card: card, node: currentCard }));
         }
-        console.log(this.state.clicked);
     };
 
     compareCards() {
