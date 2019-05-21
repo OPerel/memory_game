@@ -2,27 +2,27 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    margin: 0 5%;
+    margin: 0 0 0 5%;
     text-align: center;
-    font-size: 1.1em;
-}
-
-.header {
-    /* position: absolute;
-    top: 20px; */
+    font-size: 0.9rem;
 }
 
 .btn {
     margin: 20px 0;
     border: none;
-    font-size: 1em;
+    font-family: cursive;
+    font-size: 1rem;
     background-color: transparent;
     color: #001f4f;
 }
 
 .btn:hover {
-    text-decoration: underline;
     cursor: pointer;
+    opacity: 0.8;
+}
+
+.btn:focus {
+    outline: none;
 }
 
 .header {
@@ -39,7 +39,8 @@
 
 @media only screen and (min-width: 770px) {
     .sidebar {
-        max-width: 20%;
+        max-width: 25%;
+        text-align: left;
     }
 
     .header {
