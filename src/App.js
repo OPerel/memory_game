@@ -55,17 +55,14 @@ class App extends Component {
                 if (clicked[0].card.value === clicked[1].card.value) {
                     clicked[0].node.classList.add('match');
                     clicked[1].node.classList.add('match');
-                    prev.clicked = [];
-                    return;
                 } else {
                     setTimeout(() => {
                         clicked[0].node.classList.remove('flip');
                         clicked[1].node.classList.remove('flip');
                     }, 1500);
-                    prev.clicked = [];
                     prev.wrongGuess++;
-                    return;
                 };
+                prev.clicked = [];
             };
         });
     };

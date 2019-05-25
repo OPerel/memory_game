@@ -3,6 +3,7 @@
     height: 80vw;
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
     margin: 10% auto;
 }
 
@@ -15,7 +16,7 @@
 
 @media only screen and (min-width: 770px) {
     .memory-game {
-        margin: 2% auto;
+        margin: 4% auto;
     }
 }
 
