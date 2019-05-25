@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {
             deck: {},
             cards: [],
-            clicked: []
+            clicked: [],
+            wrongGuess: 0
         };
     };
 
@@ -54,13 +55,17 @@ class App extends Component {
                 if (clicked[0].card.value === clicked[1].card.value) {
                     clicked[0].node.classList.add('match');
                     clicked[1].node.classList.add('match');
+                    prev.clicked = [];
+                    return;
                 } else {
                     setTimeout(() => {
                         clicked[0].node.classList.remove('flip');
                         clicked[1].node.classList.remove('flip');
-                    }, 1500)
+                    }, 1500);
+                    prev.clicked = [];
+                    prev.wrongGuess++;
+                    return;
                 };
-                prev.clicked = [];
             };
         });
     };
@@ -75,7 +80,8 @@ class App extends Component {
         this.setState({
             deck: {},
             cards: [],
-            clicked: []
+            clicked: [],
+            wrongGuess: 0
         });
         this.fetchDeck();
     };
@@ -87,7 +93,7 @@ class App extends Component {
     render() {
         return (
             <div className="cont">
-                <Sidebar reset={() => this.resetBoard()} />
+                <Sidebar reset={() => this.resetBoard()} countWG={this.state.wrongGuess} />
                 <CardGame>
                     {
                         this.state.cards.map((card, i) => {

@@ -1,12 +1,13 @@
 import React from 'react';
 import './Sidebar.css';
 
-const Sidebar = ({ reset }) => {
+const Sidebar = ({ reset, countWG }) => {
     return (
         <div className="sidebar">
             <div className="header">
                 <h2>Memory Game</h2>
-                <p>Match cards from different suites.</p>
+                <p>Match pairs from different suites.</p>
+                <p>Wrong guesses: {countWG}</p>
                 <button className="btn" onClick={reset}>Reset Board</button>
             </div>
             <div className="footer">
