@@ -11,7 +11,8 @@ class App extends Component {
             deck: {},
             cards: [],
             clicked: [],
-            wrongGuess: 0
+            wrongGuess: 0,
+            win: false
         };
     };
 
@@ -64,7 +65,14 @@ class App extends Component {
                 };
                 prev.clicked = [];
             };
-        });
+        }, () => this.checkWin());
+    };
+
+    checkWin() {
+        const cards = document.querySelectorAll('.match');
+        if (cards.length === this.state.cards.length) {
+            this.setState({ win: true })
+        };
     };
 
     handleClick = (card) => (e) => {
@@ -78,7 +86,8 @@ class App extends Component {
             deck: {},
             cards: [],
             clicked: [],
-            wrongGuess: 0
+            wrongGuess: 0,
+            win: false
         });
         this.fetchDeck();
     };
@@ -91,7 +100,7 @@ class App extends Component {
         return (
             <div className="cont">
                 <Sidebar reset={() => this.resetBoard()} countWG={this.state.wrongGuess} />
-                <CardGame>
+                <CardGame win={this.state.win}>
                     {
                         this.state.cards.map((card, i) => {
                             return (

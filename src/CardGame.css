@@ -5,6 +5,35 @@
     flex-wrap: wrap;
     justify-content: space-evenly;
     margin: 10% auto;
+    position: relative;
+}
+
+@keyframes announceWin {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#win{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 25%;
+    width: 110%;
+    height: 30%;
+    font-size: 3rem;
+    color: #ffffff;
+    background-color: #476b47;
+    z-index: 1;
+    animation: announceWin 0.8s;
+}
+
+#no-win {
+    display: none;
 }
 
 @media only screen and (min-width: 450px) {
