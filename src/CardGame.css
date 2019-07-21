@@ -1,65 +1,70 @@
 .memory-game {
-    width: 80vw;
-    height: 80vw;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    margin: 10% auto;
-    position: relative;
+  width: 80vw;
+  height: 80vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-row-gap: 2%;
+  justify-items: center;
+  align-items: center;
+  /* display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly; */
+  /* margin: 10% auto; */
+  position: relative;
 }
 
 @keyframes announceWin {
-    0% {
-        transform: scale(0);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 #win{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 25%;
-    width: 110%;
-    height: 30%;
-    font-size: 3rem;
-    color: #ffffff;
-    background-color: #476b47;
-    z-index: 1;
-    animation: announceWin 0.8s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 25%;
+  width: 110%;
+  height: 30%;
+  font-size: 3rem;
+  color: #ffffff;
+  background-color: #476b47;
+  z-index: 1;
+  animation: announceWin 0.8s;
 }
 
 #no-win {
-    display: none;
+  display: none;
 }
 
 @media only screen and (min-width: 450px) {
-    .memory-game {
-        width: 70vw;
-        height: 70vw;
-    }
+  .memory-game {
+    width: 70vw;
+    height: 70vw;
+  }
 }
 
 @media only screen and (min-width: 770px) {
-    .memory-game {
-        margin: 4% auto;
-    }
+  .memory-game {
+    margin: 4% auto;
+  }
 }
 
 @media only screen and (min-width: 840px) {
-    .memory-game {
-        width: 620px;
-        height: 620px;
-    }
+  .memory-game {
+    width: 620px;
+    height: 620px;
+  }
 }
 
 @media only screen and (max-height: 400px) {
-    .memory-game {
-        width: 45vw;
-        height: 45vw;
-        margin: 10px auto;
-    }
+  .memory-game {
+    width: 45vw;
+    height: 45vw;
+    margin: 10px auto;
+  }
 }
