@@ -16,21 +16,21 @@ class App extends Component {
     };
   };
 
-  fetchDeck() {
-    return fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
-    .then(resp => resp.json())
-    .then(data => this.setState(state => {
-      return state.deck = data;
-    },() => this.drawCards()));
+  fetchDeck = async () => {
+    const deck = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
+    const deckData = await deck.json();
+    this.setState(state => {
+      return state.deck = deckData;
+    },() => this.drawCards());
   };
 
-  drawCards() {
+  drawCards = async () => {
     for (var i = 0; i < this.state.deck.remaining; i++) {
-      fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
-      .then(resp => resp.json())
-      .then(card => this.setState(state => {
-        return state.cards.push(card.cards[0]);
-      }));
+      const card = await fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
+      const cardData = await card.json();
+      this.setState(state => {
+        return state.cards.push(cardData.cards[0]);
+      });
     };
   };
 
@@ -105,9 +105,9 @@ class App extends Component {
             this.state.cards.map((card, i) => {
               return (
                 <Card
-                key={i}
-                url={card.image}
-                onClicking={this.handleClick(card)}
+                  key={i}
+                  url={card.image}
+                  onClicking={this.handleClick(card)}
                 />
               )
             })
