@@ -9,7 +9,11 @@ class App extends Component {
     super();
     this.state = {
       deck: {},
-      cards: [],
+      cards: [
+        '', '', '', '',
+        '', '', '', '',
+        '', '', '', ''
+      ],
       clicked: [],
       wrongGuess: 0,
       win: false
@@ -28,11 +32,15 @@ class App extends Component {
     for (var i = 0; i < this.state.deck.remaining; i++) {
       const card = await fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
       const cardData = await card.json();
-      this.setState(state => {
-        return state.cards.push(cardData.cards[0]);
-      });
+      this.pushToCards(cardData.cards[0], i);
     };
   };
+
+  pushToCards(card, i) {
+    this.setState(state => {
+      return state.cards.splice(i, 1, card);
+    });
+  }
 
   flipCards(e) {
     if (!e.currentTarget.classList.contains('match')) {
@@ -104,11 +112,18 @@ class App extends Component {
           {
             this.state.cards.map((card, i) => {
               return (
-                <Card
-                  key={i}
+                card ? <Card 
+                  key={card.code}
                   url={card.image}
-                  onClicking={this.handleClick(card)}
+                  onClick={this.handleClick(card)}
                 />
+                : <div
+                  key={i} 
+                  style={{
+                    width: 'calc(25% - 10px)',
+                    height: 'calc(33.333% - 10px)',
+                    margin: '0.8%'
+                  }}/>
               )
             })
           }

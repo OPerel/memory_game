@@ -2,10 +2,10 @@ import React from 'react';
 import './Card.css';
 import back from './img/back.svg'
 
-const Card = ({ url, onClicking }) => {
+const Card = ({ url, onClick }) => {
   return (
     <div className='card'>
-      <div className='inner-card' onClick={onClicking}>
+      <div className='inner-card' onClick={onClick}>
         <div className='front-face'>
           <img src={url} alt='f' />
         </div>
