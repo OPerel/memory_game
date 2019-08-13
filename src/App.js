@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import { motion, useSpring } from 'framer-motion';
 import './App.css';
 import CardGame from './CardGame'
 import Card from './Card';
@@ -11,7 +12,7 @@ class App extends Component {
       deck: {},
       cards: [
         '', '', '', '',
-        '', '', '', '',
+        '', '', '', '', 
         '', '', '', ''
       ],
       clicked: [],
@@ -38,7 +39,7 @@ class App extends Component {
 
   pushToCards(card, i) {
     this.setState(state => {
-      return state.cards.splice(i, 1, card);
+      return state.cards[i] = card;
     });
   }
 
@@ -112,18 +113,21 @@ class App extends Component {
           {
             this.state.cards.map((card, i) => {
               return (
-                card ? <Card 
-                  key={card.code}
-                  url={card.image}
-                  onClick={this.handleClick(card)}
-                />
+                card 
+                ? <Card 
+                    key={card.code}
+                    i={i}
+                    url={card.image}
+                    onClick={this.handleClick(card)}
+                  />
                 : <div
-                  key={i} 
-                  style={{
-                    width: 'calc(25% - 10px)',
-                    height: 'calc(33.333% - 10px)',
-                    margin: '0.8%'
-                  }}/>
+                    key={i} 
+                    style={{
+                      width: 'calc(25% - 10px)',
+                      height: 'calc(33.333% - 10px)',
+                      margin: '0.8%'
+                    }}
+                  />
               )
             })
           }

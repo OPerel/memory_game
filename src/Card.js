@@ -1,19 +1,38 @@
 import React from 'react';
+import { motion } from 'framer-motion';
+
 import './Card.css';
 import back from './img/back.svg'
 
-const Card = ({ url, onClick }) => {
+const Card = ({ i, url, onClick }) => {
+
   return (
-    <div className='card'>
+    <motion.div
+      className='card'
+      animate={{
+        x: [-500, 0],
+        y: [500 - i * 40, 0],
+        rotate: [-270, -90, -45, 0]
+      }}
+      transition={{
+        duration: 0.9,
+      }}
+    >
       <div className='inner-card' onClick={onClick}>
         <div className='front-face'>
           <img src={url} alt='f' />
         </div>
-        <div className='back-face'>
+        <motion.div
+          className='back-face'
+          initial={{ opacity: 0 }}
+          animate={{
+            opacity: 1,
+            transition: { duration: 0 }
+          }}>
           <img src={back} alt='b' />
-        </div>
+        </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 

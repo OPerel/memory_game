@@ -1,13 +1,13 @@
-@keyframes slideInCards {
+/* @keyframes slideInCards {
   0% {
     transform: translate(-400%, 250%) rotate(-360deg);
   }
   100% {
     transform: translate(0) rotate(0);
   }
-}
+} */
 
-.card {
+/* .card {
   width: calc(25% - 10px);
   height: calc(33.333% - 10px);
   margin: 0.8%;
@@ -18,7 +18,7 @@
   -webkit-perspective: 1000px;
           perspective: 1000px;
   animation: 0.7s slideInCards;
-}
+} */
 
 .card:active {
   transform: scale(0.97);
