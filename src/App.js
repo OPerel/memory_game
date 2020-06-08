@@ -1,3 +1,16 @@
+/**
+ * TODO:
+ * 1. Tests (Cypress).
+ * 2. State management (Recoil or useReducer and useContext).
+ * 3. Animation:
+ * ... fix card enter anime (only on reset board?);
+ * ... refactor card flip anime to framer;
+ * ... switch anime library (Spring)?
+ * 
+ * 4. Add two more dificullty levels. 
+ */
+
+
 import React, { Component } from 'react';
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
@@ -10,11 +23,7 @@ class App extends Component {
     super();
     this.state = {
       deck: {},
-      cards: [
-        '', '', '', '',
-        '', '', '', '', 
-        '', '', '', ''
-      ],
+      cards: [],
       clicked: [],
       wrongGuess: 0,
       win: false
@@ -22,11 +31,9 @@ class App extends Component {
   };
 
   fetchDeck = async () => {
-    const deck = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
-    const deckData = await deck.json();
-    this.setState(state => {
-      return state.deck = deckData;
-    },() => this.drawCards());
+    const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
+    const deck = await deckRes.json();
+    this.setState({ deck }, () => this.drawCards());
   };
 
   drawCards = async () => {
@@ -39,7 +46,9 @@ class App extends Component {
 
   pushToCards(card, i) {
     this.setState(state => {
-      return state.cards[i] = card;
+      let { cards } = state;
+      cards[i] = card;
+      return { ...state, cards }
     });
   }
 
@@ -60,7 +69,7 @@ class App extends Component {
 
   compareCards() {
     this.setState(state => {
-      const {clicked} = state;
+      const { clicked } = state;
       if (clicked.length === 2) {
         if (clicked[0].card.value === clicked[1].card.value) {
           clicked[0].node.classList.add('match');

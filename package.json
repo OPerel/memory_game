@@ -33,5 +33,21 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/OPerel/memory_game.git"
+  },
+  "devDependencies": {
+    "cypress": "^4.7.0",
+    "eslint-plugin-cypress": "^2.11.1"
+  },
+  "standard": {
+    "env": [
+      "browser",
+      "mocha"
+    ],
+    "globals": [
+      "cy",
+      "Cypress",
+      "expect",
+      "assert"
+    ]
   }
 }
