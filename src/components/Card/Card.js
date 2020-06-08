@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 import './Card.css';
-import back from './img/back.svg'
+import back from '../../img/back.svg'
 
 const Card = ({ i, url, onClick }) => {
 

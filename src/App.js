@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
-import CardGame from './CardGame'
-import Card from './Card';
-import Sidebar from './Sidebar';
+import CardGame from './components/CardGame/CardGame'
+import Card from './components/Card/Card';
+import Sidebar from './components/Sidebar/Sidebar';
 
 class App extends Component {
   constructor () {
