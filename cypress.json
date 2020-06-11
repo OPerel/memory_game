@@ -1,4 +1,4 @@
 {
-  "animationDistanceThreshold": 3,
+  "animationDistanceThreshold": 1,
   "waitForAnimations": true 
 }

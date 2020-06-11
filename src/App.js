@@ -7,7 +7,7 @@
  * ... refactor card flip anime to framer;
  * ... switch anime library (Spring)?
  * 
- * 4. Add two more dificullty levels. 
+ * 4. Add two more difficullty levels. 
  */
 
 
@@ -31,16 +31,28 @@ class App extends Component {
   };
 
   fetchDeck = async () => {
-    const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
-    const deck = await deckRes.json();
-    this.setState({ deck }, () => this.drawCards());
+    try {
+      console.log('fetching deck')
+      const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
+      const deck = await deckRes.json();
+      this.setState({ deck }, () => this.drawCards());
+    } catch (err) {
+      console.log('Error fetching deck: ', err);
+    }
+    
   };
 
   drawCards = async () => {
+    console.log('fetching card')
     for (var i = 0; i < this.state.deck.remaining; i++) {
-      const card = await fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
-      const cardData = await card.json();
-      this.pushToCards(cardData.cards[0], i);
+      try {
+        const card = await fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
+        const cardData = await card.json();
+        // console.log(cardData)
+        this.pushToCards(cardData.cards[0], i);
+      } catch (err) {
+        console.log('Error fetching card: ', err);
+      }
     };
   };
 
@@ -115,14 +127,16 @@ class App extends Component {
   };
 
   render() {
+    // console.log(JSON.stringify(this.state.cards ,null, 2))
+    const { cards, wrongGuess, win } = this.state;
     return (
       <div className="cont">
-        <Sidebar reset={() => this.resetBoard()} countWG={this.state.wrongGuess} />
-        <CardGame win={this.state.win}>
+        <Sidebar reset={() => this.resetBoard()} countWG={wrongGuess} />
+        <CardGame win={win}>
           {
-            this.state.cards.map((card, i) => {
+            cards.map((card, i) => {
               return (
-                card 
+                card
                 ? <Card 
                     key={card.code}
                     i={i}
@@ -141,6 +155,7 @@ class App extends Component {
             })
           }
         </CardGame>
+      {/* <pre>{JSON.stringify(this.state.cards ,null, 2)}</pre> */}
       </div>
     );
   };
