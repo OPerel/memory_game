@@ -42,7 +42,7 @@ describe('API tests', () => {
     //   console.log(card)
     // });
 
-    cy.get('.memory-game').children().should('have.length', 12);
+    cy.get('.cards').children().should('have.length', 12);
   })
 
   it('finds the content "Memory Game"', () => {
