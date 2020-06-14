@@ -3,7 +3,7 @@
  * 1. Tests (Cypress).
  * 2. State management (Recoil or useReducer and useContext).
  * 3. Animation:
- * ... fix card enter anime (only on reset board?);
+ * ... fix card enter anime to make cards enter one at a time;
  * ... refactor card flip anime to framer;
  * ... switch anime library (Spring)?
  * 
@@ -43,17 +43,17 @@ class App extends Component {
   };
 
   drawCards = async () => {
-    console.log('fetching card')
-    for (var i = 0; i < this.state.deck.remaining; i++) {
-      try {
-        const card = await fetch(`https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=1`)
-        const cardData = await card.json();
-        // console.log(cardData)
-        this.pushToCards(cardData.cards[0], i);
-      } catch (err) {
-        console.log('Error fetching card: ', err);
-      }
-    };
+    // console.log('fetching card state.deck: ', this.state.deck)
+    try {
+      const url = `https://deckofcardsapi.com/api/deck/${this.state.deck.deck_id}/draw/?count=12`;
+      const card = await fetch(url)
+      const cardData = await card.json();
+      // console.log('cardData: ', JSON.stringify(cardData, null, 2))
+      // this.setState({ cards: cardData.cards })
+      cardData.cards.forEach((card, i) => this.pushToCards(card, i))
+    } catch (err) {
+      console.log('Error fetching card: ', err);
+    }
   };
 
   pushToCards(card, i) {
@@ -127,7 +127,8 @@ class App extends Component {
   };
 
   render() {
-    // console.log(JSON.stringify(this.state.cards ,null, 2))
+    // console.log('deck: ', JSON.stringify(this.state.deck ,null, 2))
+    // console.log('cards: ', JSON.stringify(this.state.cards ,null, 2))
     const { cards, wrongGuess, win } = this.state;
     return (
       <div className="cont">
@@ -155,7 +156,6 @@ class App extends Component {
             })
           }
         </CardGame>
-      {/* <pre>{JSON.stringify(this.state.cards ,null, 2)}</pre> */}
       </div>
     );
   };
