@@ -7,7 +7,8 @@
  * ... refactor card flip anime to framer;
  * ... switch anime library (Spring)?
  * 
- * 4. Add two more difficullty levels. 
+ * 4. Add two more difficultly levels.
+ * 5. Refactor card state to not manipulate the DOM nodes directly.
  */
 
 

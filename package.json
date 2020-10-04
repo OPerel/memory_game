@@ -6,12 +6,13 @@
     "framer-motion": "^1.6.3",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
-    "react-scripts": "^3.3.0"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "dev": "node node_modules/react-scripts/scripts/start.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "cypress": "cypress open",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -35,7 +36,7 @@
     "url": "git+https://github.com/OPerel/memory_game.git"
   },
   "devDependencies": {
-    "cypress": "^4.7.0",
+    "cypress": "^4.12.0",
     "eslint-plugin-cypress": "^2.11.1"
   },
   "standard": {
