@@ -11,4 +11,9 @@ npm install
 npm start
 ```
 
+### Tests
+To open the Cypress GUI run
+```bash
+npm run cypress
+```
 
