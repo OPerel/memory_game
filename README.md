@@ -1,7 +1,8 @@
 # Memory Game
 Simple memory game. Find matching cards of different suites.
 - Bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
-- Using the new [Recoil](https://recoiljs.org/) state management library.
+- Using [Recoil](https://recoiljs.org/) state management library.
+- Drawing cards from [Deck of Cards](http://deckofcardsapi.com/) API.
 
 ### Install and Run
 ```bash
