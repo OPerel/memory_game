@@ -2,7 +2,7 @@ import React from 'react';
 import './Sidebar.css';
 
 import { useRecoilValue } from 'recoil';
-import { wrongGuessAtom } from '../../recoil';
+import { wrongGuessAtom } from '../../utils/recoil';
 
 const Sidebar = ({ reset }) => {
   const countWg = useRecoilValue(wrongGuessAtom); 

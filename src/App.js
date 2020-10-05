@@ -14,8 +14,8 @@
 
 import React, { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { cardsAtom, clickedSelector, wrongGuessAtom, winAtom } from './recoil';
-import { useClickCardListener, useCheckWinListener } from './hooks';
+import { cardsAtom, clickedSelector, wrongGuessAtom, winAtom } from './utils/recoil';
+import { useClickCardListener, useCheckWinListener } from './utils/hooks';
 
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
@@ -28,7 +28,7 @@ const App = () => {
   const [cards, setCards] = useRecoilState(cardsAtom);
   const clicked = useRecoilValue(clickedSelector);
   const setWrongGuess = useSetRecoilState(wrongGuessAtom);
-  const [win, setWin] = useRecoilState(winAtom);
+  const setWin = useSetRecoilState(winAtom);
 
   useClickCardListener();
   useCheckWinListener();

@@ -1,13 +1,11 @@
 import { atom, selector } from 'recoil';
 
-
 /*** Atoms ***/
 
 const cardsAtom = atom({
   key: 'cards',
   default: {}
 });
-
 
 const wrongGuessAtom = atom({
   key: 'wrongGuess',
@@ -37,8 +35,7 @@ const matchedSelector = selector({
   }
 })
 
-
-// export
+// Export
 export {
   cardsAtom,
   wrongGuessAtom,

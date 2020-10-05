@@ -37,7 +37,8 @@ const useCheckWinListener = () => {
   const matched = useRecoilValue(matchedSelector);
 
   useEffect(() => {
-    if (Object.keys(cards).length && Object.keys(cards).length === matched.length) {
+    const keys = Object.keys(cards).length;
+    if (keys && keys === matched.length) {
       console.log('WIN!!!!!!!!!!!!');
       setWin(true);
     };

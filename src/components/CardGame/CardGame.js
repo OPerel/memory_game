@@ -2,7 +2,7 @@ import React from 'react';
 import './CardGame.css';
 
 import { useRecoilValue } from 'recoil';
-import { winAtom } from '../../recoil';
+import { winAtom } from '../../utils/recoil';
 
 const CardGame = ({ children }) => {
   const win = useRecoilValue(winAtom);
