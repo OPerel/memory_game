@@ -2,12 +2,14 @@ import React from 'react';
 import './CardGame.css';
 
 import { useRecoilValue } from 'recoil';
-import { winAtom } from '../../utils/recoil';
+import { winAtom, levelAtom } from '../../utils/recoil';
 
 const CardGame = ({ children }) => {
   const win = useRecoilValue(winAtom);
+  const level = useRecoilValue(levelAtom);
+
   return (
-    <div className='memory-game'>
+    <div className={`memory-game ${level !== 'beginner' ? 'scroll' : ''}`}>
       <div id={win ? 'win' : 'no-win'}>
         <h3>You Win!</h3>
       </div>

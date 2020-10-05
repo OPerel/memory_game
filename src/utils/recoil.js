@@ -17,6 +17,11 @@ const winAtom = atom({
   default: false
 });
 
+const levelAtom = atom({
+  key: 'level',
+  default: 'beginner'
+})
+
 /*** Selectors ***/
 
 const clickedSelector = selector({
@@ -33,7 +38,13 @@ const matchedSelector = selector({
     const cards = get(cardsAtom);
     return Object.values(cards).filter(card => card.match);
   }
-})
+});
+
+// const levelSelector = selector({
+//   key: 'levelSelector',
+//   get: ({ get }) => get(levelAtom),
+//   set: ({ set }, newValue) => set(levelAtom, newValue)
+// });
 
 // Export
 export {
@@ -41,7 +52,8 @@ export {
   wrongGuessAtom,
   winAtom,
   clickedSelector,
-  matchedSelector
+  matchedSelector,
+  levelAtom
 }
 
 

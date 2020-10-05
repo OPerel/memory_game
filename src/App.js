@@ -14,7 +14,7 @@
 
 import React, { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { cardsAtom, clickedSelector, wrongGuessAtom, winAtom } from './utils/recoil';
+import { cardsAtom, clickedSelector, levelAtom, wrongGuessAtom, winAtom } from './utils/recoil';
 import { useClickCardListener, useCheckWinListener } from './utils/hooks';
 
 // import { motion, useSpring } from 'framer-motion';
@@ -29,16 +29,29 @@ const App = () => {
   const clicked = useRecoilValue(clickedSelector);
   const setWrongGuess = useSetRecoilState(wrongGuessAtom);
   const setWin = useSetRecoilState(winAtom);
+  const level = useRecoilValue(levelAtom);
 
   useClickCardListener();
   useCheckWinListener();
 
   const drawCards = async () => {
+    const cardsByLevel = {
+      beginner: '9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH',
+      intermediate: '7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH',
+      expert: '5S,5H,6S,6H,7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH'
+    }[level];
+
+    const countByLevel = {
+      beginner: '12',
+      intermediate: '16',
+      expert: '20'
+    }[level];
+
     try {
-      const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
+      const deckRes = await fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?cards=${cardsByLevel}`);
       const deck = await deckRes.json();
-      const url = `https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=12`;
-      const card = await fetch(url)
+      const url = `https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=${countByLevel}`;
+      const card = await fetch(url);
       const cardData = await card.json();
 
       const cardObj = {}; 
@@ -70,9 +83,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    drawCards();
+    resetBoard();
     // eslint-disable-next-line
-  }, []);
+  }, [level]);
 
   return (
     <div className="cont">
