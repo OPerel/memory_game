@@ -79,25 +79,14 @@ const App = () => {
       <Sidebar reset={() => resetBoard()} />
       <CardGame>
         {
-          Object.values(cards).map((card, i) => {
-            return (
-              card
-              ? <Card 
-                  key={card.code}
-                  classes={`${card.flip ? 'flip' : ''}`}
-                  url={card.image}
-                  onClick={() => handleClick(card)}
-                />
-              : <div
-                  key={i} 
-                  style={{
-                    width: 'calc(25% - 10px)',
-                    height: 'calc(33.333% - 10px)',
-                    margin: '0.8%'
-                  }}
-                />
-            )
-          })
+          Object.values(cards).map(card => (
+            <Card 
+              key={card.code}
+              classes={`${card.flip ? 'flip' : ''}`}
+              url={card.image}
+              onClick={() => handleClick(card)}
+            />
+          ))
         }
       </CardGame>
     </div>

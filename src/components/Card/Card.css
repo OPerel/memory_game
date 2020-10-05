@@ -25,6 +25,10 @@
   transition: transform .3s;
 }
 
+.card.flip {
+  pointer-events: none;
+}
+
 .inner-card {
   position: absolute;
   height: 100%;

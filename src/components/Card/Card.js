@@ -18,7 +18,7 @@ const Card = ({ classes, url, onClick }) => {
     //     duration: 0.9,
     //   }}
     // >
-    <div className={`card`}>
+    <div className={`card ${classes}`}>
       <div className={`inner-card ${classes}`} onClick={onClick}>
         <div className='front-face'>
           <img src={url} alt='f' />
