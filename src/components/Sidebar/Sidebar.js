@@ -15,10 +15,12 @@ const Sidebar = ({ reset }) => {
         <p>Match pairs from different suites.</p>
         <p>Wrong guesses: {countWg}</p>
         <button className="btn" onClick={reset}>Reset Board</button>
+        <LevelSelector />
       </div>
-      <LevelSelector />
+      
       <div className="footer">
         <p>Made with <a href="http://deckofcardsapi.com/" target="_blank" rel="noopener noreferrer">Deck Of Cards</a>.</p>
+        <p>Created by <a href="https://github.com/OPerel">Ori Perelman</a> &copy; {new Date().getFullYear()}.</p>
       </div>
     </div>
   )

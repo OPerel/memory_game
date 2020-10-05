@@ -7,8 +7,9 @@
  * ... refactor card flip anime to framer;
  * ... switch anime library (Spring)?
  * 
- * 4. Add two more difficultly levels.
+ * 4. Style difficulty levels board
  * 5. TypeScript?
+ * 6. Refactor button and select styles
  */
 
 

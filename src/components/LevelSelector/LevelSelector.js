@@ -1,4 +1,5 @@
 import React from 'react';
+import './LevelSelector.css'
 
 import { useRecoilState } from 'recoil';
 import { levelAtom } from '../../utils/recoil';

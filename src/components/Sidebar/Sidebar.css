@@ -1,62 +1,78 @@
 .sidebar {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 0;
-    text-align: center;
-    font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 0;
+  text-align: center;
+  font-size: 0.8rem;
 }
 
 .btn {
-    margin: 20px 0;
-    border: none;
-    font-family: cursive;
-    font-size: 1rem;
-    background-color: transparent;
-    color: #001f4f;
+  /* display: block; */
+  margin: 8% 0;
+  padding: 2% 6%;
+  border: none;
+  font-family: cursive;
+  font-size: 1rem;
+  background-color: #008b8b;
+  color: #ffffff;
+  border: #ffffff75 solid 1px;
+  border-radius: 4px;
+  transition: 0.3s;
 }
 
 .btn:hover {
-    cursor: pointer;
-    opacity: 0.8;
+  cursor: pointer;
+  background-color: #007474;
 }
 
 .btn:focus {
-    outline: none;
+  outline: none;
 }
 
 .header {
-    font-size: 1.3em;
+  font-size: 1.3em;
 }
 
 .header h2 {
-    margin: 10px 0;
+  margin: 10px 0;
 }
 
 .header p {
-    margin: 5px 0;
+  margin: 5px 0;
 }
 
 .footer {
-    margin-bottom: 15%;
+  /* margin-bottom: 15%; */
+  text-align: center;
+  font-size: 1.1em;
+}
+
+.footer p {
+  margin: 2% 0;
 }
 
 .footer a {
-    color: inherit;
+  color: #85dfdf;
+  text-decoration: none;
+}
+
+.footer a:hover {
+  text-decoration: underline;
 }
 
 @media only screen and (min-width: 770px) {
-    .sidebar {
-        max-width: 25%;
-        margin: 0 0 0 5%;
-        text-align: left;
-    }
+  .sidebar {
+    max-width: 25%;
+    margin: 0 0 0 5%;
+    text-align: left;
+  }
 
-    .header {
-        margin-top: 30%;
-    }
+  .header {
+    margin-top: 30%;
+  }
 
-    .footer {
-        margin-bottom: 30%;
-    }
+  .footer {
+    /* margin-bottom: 30%; */
+  }
 }
