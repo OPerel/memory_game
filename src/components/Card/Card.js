@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import './Card.css';
 import back from '../../img/back.svg'
 
-const Card = ({ i, url, onClick }) => {
+const Card = ({ classes, url, onClick }) => {
 
   return (
     // <motion.div
@@ -18,8 +18,8 @@ const Card = ({ i, url, onClick }) => {
     //     duration: 0.9,
     //   }}
     // >
-    <div className='card'>
-      <div className='inner-card' onClick={onClick}>
+    <div className={`card`}>
+      <div className={`inner-card ${classes}`} onClick={onClick}>
         <div className='front-face'>
           <img src={url} alt='f' />
         </div>
