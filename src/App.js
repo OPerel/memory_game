@@ -8,8 +8,9 @@
  * ... switch anime library (Spring)?
  * 
  * 4. Style difficulty levels board
- * 5. TypeScript?
+ * 5. TypeScript (?)
  * 6. Refactor button and select styles
+ * 7. Refactor drawCards and handleCLick to recoil (?)
  */
 
 
@@ -17,6 +18,7 @@ import React, { useEffect } from 'react';
 import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
 import { cardsAtom, clickedSelector, drawCardsSelector, wrongGuessAtom, winAtom } from './utils/recoil';
 import { useClickCardListener, useCheckWinListener } from './utils/hooks';
+import fetchCards from './utils/fetchCards';
 
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
@@ -38,27 +40,13 @@ const App = () => {
   useCheckWinListener();
 
   const drawCards = async () => {
-    resetCards();
-    resetWin();
-    resetWrongGuess();
-
-    try {
-      const deckRes = await fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?cards=${cardsByLevel}`);
-      const deck = await deckRes.json();
-      const url = `https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=${countByLevel}`;
-      const card = await fetch(url);
-      const cardData = await card.json();
-
-      const cardObj = {}; 
-      cardData.cards.forEach(card => {
-        const { code, image, images, suit, value } = card;
-        cardObj[code] = { code, image, images, suit, value, flip: false, match: false }
-      })
-
-      setCards(cardObj);
-    } catch (err) {
-      console.log('Error fetching card: ', err);
+    if (Object.keys(cards).length) {
+      resetCards();
+      resetWin();
+      resetWrongGuess();
     }
+
+    setCards(await fetchCards(cardsByLevel, countByLevel));
   };
 
   const handleClick = (card) => {

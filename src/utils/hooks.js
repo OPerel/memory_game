@@ -22,10 +22,10 @@ const useClickCardListener = () => {
           [clicked[0].code]: { ...clicked[0], flip: false },
           [clicked[1].code]: { ...clicked[1], flip: false }
         }
-        setCards({ ...cards, ...revertClicked })
+        setCards({ ...cards, ...revertClicked });
       }, 1500);
 
-      setWrongGuess(wrongGuess + 1)
+      setWrongGuess(wrongGuess + 1);
     };
     // eslint-disable-next-line 
   }, [clicked])
