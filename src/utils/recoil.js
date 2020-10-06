@@ -40,11 +40,17 @@ const matchedSelector = selector({
   }
 });
 
-// const levelSelector = selector({
-//   key: 'levelSelector',
-//   get: ({ get }) => get(levelAtom),
-//   set: ({ set }, newValue) => set(levelAtom, newValue)
-// });
+const drawCardsSelector = selector({
+  key: 'drawCardsSelector',
+  get: ({ get }) => {
+    const level = get(levelAtom);
+    return {
+      beginner: ['9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '12'],
+      intermediate: ['7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '16'],
+      expert: ['5S,5H,6S,6H,7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '20']
+    }[level];
+  }
+});
 
 // Export
 export {
@@ -53,7 +59,8 @@ export {
   winAtom,
   clickedSelector,
   matchedSelector,
-  levelAtom
+  levelAtom,
+  drawCardsSelector
 }
 
 

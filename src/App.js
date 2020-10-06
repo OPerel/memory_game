@@ -14,8 +14,8 @@
 
 
 import React, { useEffect } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { cardsAtom, clickedSelector, levelAtom, wrongGuessAtom, winAtom } from './utils/recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { cardsAtom, clickedSelector, drawCardsSelector, wrongGuessAtom, winAtom } from './utils/recoil';
 import { useClickCardListener, useCheckWinListener } from './utils/hooks';
 
 // import { motion, useSpring } from 'framer-motion';
@@ -28,25 +28,19 @@ const App = () => {
 
   const [cards, setCards] = useRecoilState(cardsAtom);
   const clicked = useRecoilValue(clickedSelector);
-  const setWrongGuess = useSetRecoilState(wrongGuessAtom);
-  const setWin = useSetRecoilState(winAtom);
-  const level = useRecoilValue(levelAtom);
+  const [cardsByLevel, countByLevel] = useRecoilValue(drawCardsSelector);
+
+  const resetCards = useResetRecoilState(cardsAtom);
+  const resetWin = useResetRecoilState(winAtom);
+  const resetWrongGuess = useResetRecoilState(wrongGuessAtom);
 
   useClickCardListener();
   useCheckWinListener();
 
   const drawCards = async () => {
-    const cardsByLevel = {
-      beginner: '9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH',
-      intermediate: '7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH',
-      expert: '5S,5H,6S,6H,7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH'
-    }[level];
-
-    const countByLevel = {
-      beginner: '12',
-      intermediate: '16',
-      expert: '20'
-    }[level];
+    resetCards();
+    resetWin();
+    resetWrongGuess();
 
     try {
       const deckRes = await fetch(`https://deckofcardsapi.com/api/deck/new/shuffle/?cards=${cardsByLevel}`);
@@ -59,7 +53,7 @@ const App = () => {
       cardData.cards.forEach(card => {
         const { code, image, images, suit, value } = card;
         cardObj[code] = { code, image, images, suit, value, flip: false, match: false }
-      }) 
+      })
 
       setCards(cardObj);
     } catch (err) {
@@ -75,22 +69,14 @@ const App = () => {
     } 
   };
 
-  const resetBoard = () => {
-    setCards({});
-    setWrongGuess(0);
-    setWin(false);
-
-    drawCards();
-  };
-
   useEffect(() => {
-    resetBoard();
+    drawCards();
     // eslint-disable-next-line
-  }, [level]);
+  }, [cardsByLevel]);
 
   return (
     <div className="cont">
-      <Sidebar reset={() => resetBoard()} />
+      <Sidebar reset={() => drawCards()} />
       <CardGame>
         {
           Object.values(cards).map(card => (
