@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+// import fetchCards from './fetchCards';
 
 /*** Atoms ***/
 
@@ -20,9 +21,24 @@ const winAtom = atom({
 const levelAtom = atom({
   key: 'level',
   default: 'beginner'
-})
+});
 
 /*** Selectors ***/
+
+/** 
+ * TODO:
+ * To refactor all logic to recoil, separate drawing cards from the API,
+ * and modifying the cards by user actions. 
+ */
+
+// const cardsSelector = selector({
+//   key: 'cardsSelector',
+//   get: async ({ get }) => {
+//     const [cardsByLevel, countByLevel] = get(drawCardsSelector);
+//     const cardsObj = await fetchCards(cardsByLevel, countByLevel);
+//     return cardsObj;
+//   }
+// })
 
 const clickedSelector = selector({
   key: 'clickedCardsSelector',

@@ -9,8 +9,9 @@
  * 
  * 4. Style difficulty levels board
  * 5. TypeScript (?)
- * 6. Refactor button and select styles
+ * 6. Refactor button and select styles (sass? cssInJS?)
  * 7. Refactor drawCards and handleCLick to recoil (?)
+ * 8. Loading animation
  */
 
 
@@ -22,7 +23,7 @@ import fetchCards from './utils/fetchCards';
 
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
-import CardGame from './components/CardGame/CardGame'
+import CardGame from './components/CardGame/CardGame';
 import Card from './components/Card/Card';
 import Sidebar from './components/Sidebar/Sidebar';
 
@@ -52,7 +53,7 @@ const App = () => {
   const handleClick = (card) => {
     if (!card.match && clicked.length < 2) {
       const newCard = { ...card, flip: true };
-      const newCards = { ...cards, [card.code]: newCard }
+      const newCards = { ...cards, [card.code]: newCard };
       setCards(newCards);
     } 
   };
@@ -65,7 +66,7 @@ const App = () => {
   return (
     <div className="cont">
       <Sidebar reset={() => drawCards()} />
-      <CardGame>
+      {Object.keys(cards).length ? <CardGame>
         {
           Object.values(cards).map(card => (
             <Card 
@@ -76,7 +77,7 @@ const App = () => {
             />
           ))
         }
-      </CardGame>
+      </CardGame> : <h1 style={{ margin: '20% auto', fontSize: '3rem' }}>Loading</h1>}
     </div>
   );
 };
