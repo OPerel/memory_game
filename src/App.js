@@ -7,19 +7,23 @@
  * ... refactor card flip anime to framer;
  * ... switch anime library (Spring)?
  * 
- * 4. Add two more difficultly levels.
- * 5. TypeScript?
+ * 4. Style difficulty levels board
+ * 5. TypeScript (?)
+ * 6. Refactor button and select styles (sass? cssInJS?)
+ * 7. Refactor drawCards and handleCLick to recoil (?)
+ * 8. Loading animation
  */
 
 
 import React, { useEffect } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
-import { cardsAtom, clickedSelector, wrongGuessAtom, winAtom } from './utils/recoil';
+import { useRecoilState, useRecoilValue, useResetRecoilState } from 'recoil';
+import { cardsAtom, clickedSelector, drawCardsSelector, wrongGuessAtom, winAtom } from './utils/recoil';
 import { useClickCardListener, useCheckWinListener } from './utils/hooks';
+import fetchCards from './utils/fetchCards';
 
 // import { motion, useSpring } from 'framer-motion';
 import './App.css';
-import CardGame from './components/CardGame/CardGame'
+import CardGame from './components/CardGame/CardGame';
 import Card from './components/Card/Card';
 import Sidebar from './components/Sidebar/Sidebar';
 
@@ -27,57 +31,42 @@ const App = () => {
 
   const [cards, setCards] = useRecoilState(cardsAtom);
   const clicked = useRecoilValue(clickedSelector);
-  const setWrongGuess = useSetRecoilState(wrongGuessAtom);
-  const setWin = useSetRecoilState(winAtom);
+  const [cardsByLevel, countByLevel] = useRecoilValue(drawCardsSelector);
+
+  const resetCards = useResetRecoilState(cardsAtom);
+  const resetWin = useResetRecoilState(winAtom);
+  const resetWrongGuess = useResetRecoilState(wrongGuessAtom);
 
   useClickCardListener();
   useCheckWinListener();
 
   const drawCards = async () => {
-    try {
-      const deckRes = await fetch('https://deckofcardsapi.com/api/deck/new/shuffle/?cards=9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH')
-      const deck = await deckRes.json();
-      const url = `https://deckofcardsapi.com/api/deck/${deck.deck_id}/draw/?count=12`;
-      const card = await fetch(url)
-      const cardData = await card.json();
-
-      const cardObj = {}; 
-      cardData.cards.forEach(card => {
-        const { code, image, images, suit, value } = card;
-        cardObj[code] = { code, image, images, suit, value, flip: false, match: false }
-      }) 
-
-      setCards(cardObj);
-    } catch (err) {
-      console.log('Error fetching card: ', err);
+    if (Object.keys(cards).length) {
+      resetCards();
+      resetWin();
+      resetWrongGuess();
     }
+
+    setCards(await fetchCards(cardsByLevel, countByLevel));
   };
 
   const handleClick = (card) => {
     if (!card.match && clicked.length < 2) {
       const newCard = { ...card, flip: true };
-      const newCards = { ...cards, [card.code]: newCard }
+      const newCards = { ...cards, [card.code]: newCard };
       setCards(newCards);
     } 
-  };
-
-  const resetBoard = () => {
-    setCards({});
-    setWrongGuess(0);
-    setWin(false);
-
-    drawCards();
   };
 
   useEffect(() => {
     drawCards();
     // eslint-disable-next-line
-  }, []);
+  }, [cardsByLevel]);
 
   return (
     <div className="cont">
-      <Sidebar reset={() => resetBoard()} />
-      <CardGame>
+      <Sidebar reset={() => drawCards()} />
+      {Object.keys(cards).length ? <CardGame>
         {
           Object.values(cards).map(card => (
             <Card 
@@ -88,7 +77,7 @@ const App = () => {
             />
           ))
         }
-      </CardGame>
+      </CardGame> : <h1 style={{ margin: '20% auto', fontSize: '3rem' }}>Loading</h1>}
     </div>
   );
 };

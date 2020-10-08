@@ -1,0 +1,18 @@
+select {
+  padding: 2.4%;
+  border-radius: 4px;
+  margin: 0 5%;
+  background-color: #008b8b;
+  color: #fff;
+  border: #ffffff75 0.2px solid;
+  transition: 0.3s;
+}
+
+select:hover {
+  cursor: pointer;
+  background-color: #007474;
+}
+
+select:focus {
+  outline: none;
+}

@@ -1,4 +1,5 @@
 import { atom, selector } from 'recoil';
+// import fetchCards from './fetchCards';
 
 /*** Atoms ***/
 
@@ -17,7 +18,27 @@ const winAtom = atom({
   default: false
 });
 
+const levelAtom = atom({
+  key: 'level',
+  default: 'beginner'
+});
+
 /*** Selectors ***/
+
+/** 
+ * TODO:
+ * To refactor all logic to recoil, separate drawing cards from the API,
+ * and modifying the cards by user actions. 
+ */
+
+// const cardsSelector = selector({
+//   key: 'cardsSelector',
+//   get: async ({ get }) => {
+//     const [cardsByLevel, countByLevel] = get(drawCardsSelector);
+//     const cardsObj = await fetchCards(cardsByLevel, countByLevel);
+//     return cardsObj;
+//   }
+// })
 
 const clickedSelector = selector({
   key: 'clickedCardsSelector',
@@ -33,7 +54,19 @@ const matchedSelector = selector({
     const cards = get(cardsAtom);
     return Object.values(cards).filter(card => card.match);
   }
-})
+});
+
+const drawCardsSelector = selector({
+  key: 'drawCardsSelector',
+  get: ({ get }) => {
+    const level = get(levelAtom);
+    return {
+      beginner: ['9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '12'],
+      intermediate: ['7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '16'],
+      expert: ['5S,5H,6S,6H,7S,7H,8S,8H,9S,9H,0S,0H,JS,JH,QS,QH,KS,KH,AS,AH', '20']
+    }[level];
+  }
+});
 
 // Export
 export {
@@ -41,7 +74,9 @@ export {
   wrongGuessAtom,
   winAtom,
   clickedSelector,
-  matchedSelector
+  matchedSelector,
+  levelAtom,
+  drawCardsSelector
 }
 
 
